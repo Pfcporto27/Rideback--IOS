@@ -48,10 +48,9 @@ workflows:
 
           mkdir -p Payload
           cp -r RideBack.app Payload/
-          zip -r $CM_BUILD_DIR/RideBack-iOS.ipa Payload
+          mkdir -p build/ios/ipa
+          zip -r build/ios/ipa/RideBack-iOS.ipa Payload
           zip -r RideBack-iOS.ipa Payload
-          ls -lh $CM_BUILD_DIR/RideBack-iOS.ipa
     artifacts:
+      - build/ios/ipa/*.ipa
       - "*.ipa"
-      - "**/*.ipa"
-      - RideBack-iOS.ipa
