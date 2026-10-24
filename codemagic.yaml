@@ -46,10 +46,10 @@ workflows:
           </dict>
           EOF
 
-          mkdir -p build/ios/ipa
           mkdir -p Payload
           cp -r RideBack.app Payload/
-          zip -r build/ios/ipa/RideBack.ipa Payload
-          cp build/ios/ipa/RideBack.ipa ./RideBack.ipa
+          zip -r RideBack-iOS.zip Payload RideBack.app
+          zip -r RideBack-iOS.ipa Payload
     artifacts:
-      - build/ios/ipa/*.ipa
+      - "*.zip"
+      - "*.ipa"
