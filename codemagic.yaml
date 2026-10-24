@@ -141,7 +141,7 @@ workflows:
           			};
           			name = Debug;
           		};
-          		Z20000022800000100000002 /* Release */ = {
+          		Z200000228000002 /* Release */ = {
           			isa = XCBuildConfiguration;
           			buildSettings = {
           				CODE_SIGNING_ALLOWED = NO;
@@ -179,14 +179,16 @@ workflows:
             -scheme RideBack \
             -configuration Release \
             -sdk iphonesimulator \
-            -derivedDataPath build \
+            -derivedDataPath build_output \
             CODE_SIGNING_ALLOWED=NO \
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGN_IDENTITY=""
 
           mkdir -p Payload
-          APP_PATH=$(find build -name "RideBack.app" | head -n 1)
+          APP_PATH=$(find build_output -name "*.app" | head -n 1)
+          echo "Copiando aplicación desde: $APP_PATH"
           cp -r "$APP_PATH" Payload/
           zip -r RideBack-iOS.ipa Payload
+          ls -lh RideBack-iOS.ipa
     artifacts:
       - RideBack-iOS.ipa
