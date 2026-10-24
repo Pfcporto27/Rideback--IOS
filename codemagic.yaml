@@ -6,10 +6,20 @@ workflows:
     environment:
       xcode: latest
     scripts:
-      - name: Build iOS App
+      - name: Build iOS App with Xcode
         script: |
-          echo "Building iOS App..."
-          xcodebuild build -scheme RideBack -destination 'generic/platform=iOS'
+          echo "Building iOS App with new Xcode project..."
+          xcodebuild archive \
+            -project RideBack.xcodeproj \
+            -scheme RideBack \
+            -archivePath build/RideBack.xcarchive \
+            -destination 'generic/platform=iOS' \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO
+
+          mkdir -p Payload
+          cp -r build/RideBack.xcarchive/Products/Applications/RideBack.app Payload/
+          zip -r RideBack.ipa Payload
     artifacts:
       - "*.ipa"
-      - "build/ios/ipa/*.ipa"
+      - Payload/*.ipa
