@@ -6,20 +6,186 @@ workflows:
     environment:
       xcode: latest
     scripts:
-      - name: Build iOS App with Xcode
+      - name: Build Real iOS App
         script: |
-          echo "Building iOS App with new Xcode project..."
+          set -e
+          mkdir -p RideBack.xcodeproj
+          cat << 'EOF' > RideBack.xcodeproj/project.pbxproj
+          // !$*UTF8*$!
+          {
+          	archiveVersion = 1;
+          	classes = {
+          	};
+          	objectVersion = 56;
+          	objects = {
+          		B10000012800000100000001 /* RideBackApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000012800000100000001 /* RideBackApp.swift */; };
+          		B10000022800000100000002 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000022800000100000002 /* ContentView.swift */; };
+          		B10000032800000100000003 /* FallDetectorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000032800000100000003 /* FallDetectorManager.swift */; };
+          		B10000042800000100000004 /* QRCodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000042800000100000004 /* QRCodeGenerator.swift */; };
+          		B10000052800000100000005 /* RecoveryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000052800000100000005 /* RecoveryStorage.swift */; };
+          		F10000012800000100000001 /* RideBackApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideBackApp.swift; sourceTree = "<group>"; };
+          		F10000022800000100000002 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+          		F10000032800000100000003 /* FallDetectorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FallDetectorManager.swift; sourceTree = "<group>"; };
+          		F10000042800000100000004 /* QRCodeGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeGenerator.swift; sourceTree = "<group>"; };
+          		F10000052800000100000005 /* RecoveryStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryStorage.swift; sourceTree = "<group>"; };
+          		F10000062800000100000006 /* RideBack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RideBack.app; sourceTree = BUILT_PRODUCTS_DIR; };
+          		G10000002800000100000000 = {
+          			isa = PBXGroup;
+          			children = (
+          				F10000012800000100000001 /* RideBackApp.swift */,
+          				F10000022800000100000002 /* ContentView.swift */,
+          				F10000032800000100000003 /* FallDetectorManager.swift */,
+          				F10000042800000100000004 /* QRCodeGenerator.swift */,
+          				F10000052800000100000005 /* RecoveryStorage.swift */,
+          				G10000012800000100000001 /* Products */,
+          			);
+          			sourceTree = "<group>";
+          		};
+          		G10000012800000100000001 /* Products */ = {
+          			isa = PBXGroup;
+          			children = (
+          				F10000062800000100000006 /* RideBack.app */,
+          			);
+          			name = Products;
+          			sourceTree = "<group>";
+          		};
+          		T10000002800000100000000 /* RideBack */ = {
+          			isa = PBXNativeTarget;
+          			buildConfigurationList = C20000002800000100000000;
+          			buildPhases = (
+          				S10000002800000100000000,
+          			);
+          			buildRules = ();
+          			dependencies = ();
+          			name = RideBack;
+          			productName = RideBack;
+          			productReference = F10000062800000100000006;
+          			productType = "com.apple.product-type.application";
+          		};
+          		P10000002800000100000000 /* Project object */ = {
+          			isa = PBXProject;
+          			attributes = {
+          				BuildIndependentTargetsInParallel = 1;
+          				LastSwiftUpdateCheck = 1500;
+          				LastUpgradeCheck = 1500;
+          			};
+          			buildConfigurationList = C10000002800000100000000;
+          			compatibilityVersion = "Xcode 14.0";
+          			developmentRegion = en;
+          			hasScannedForEncodings = 0;
+          			knownRegions = (en, Base);
+          			mainGroup = G10000002800000100000000;
+          			productRefGroup = G10000012800000100000001;
+          			projectDirPath = "";
+          			projectRoot = "";
+          			targets = (T10000002800000100000000);
+          		};
+          		S10000002800000100000000 /* Sources */ = {
+          			isa = PBXSourcesBuildPhase;
+          			buildActionMask = 2147483647;
+          			files = (
+          				B10000012800000100000001,
+          				B10000022800000100000002,
+          				B10000032800000100000003,
+          				B10000042800000100000004,
+          				B10000052800000100000005,
+          			);
+          			runOnlyForDeploymentPostprocessing = 0;
+          		};
+          		Z10000012800000100000001 /* Debug */ = {
+          			isa = XCBuildConfiguration;
+          			buildSettings = {
+          				ALWAYS_SEARCH_USER_PATHS = NO;
+          				CLANG_ENABLE_MODULES = YES;
+          				CODE_SIGNING_ALLOWED = NO;
+          				CODE_SIGNING_REQUIRED = NO;
+          				CODE_SIGN_IDENTITY = "";
+          				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+          				PRODUCT_BUNDLE_IDENTIFIER = com.rideback.app;
+          				PRODUCT_NAME = "$(TARGET_NAME)";
+          				SDKROOT = iphoneos;
+          				SWIFT_VERSION = 5.0;
+          				TARGETED_DEVICE_FAMILY = "1,2";
+          			};
+          			name = Debug;
+          		};
+          		Z10000022800000100000002 /* Release */ = {
+          			isa = XCBuildConfiguration;
+          			buildSettings = {
+          				ALWAYS_SEARCH_USER_PATHS = NO;
+          				CLANG_ENABLE_MODULES = YES;
+          				CODE_SIGNING_ALLOWED = NO;
+          				CODE_SIGNING_REQUIRED = NO;
+          				CODE_SIGN_IDENTITY = "";
+          				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+          				PRODUCT_BUNDLE_IDENTIFIER = com.rideback.app;
+          				PRODUCT_NAME = "$(TARGET_NAME)";
+          				SDKROOT = iphoneos;
+          				SWIFT_VERSION = 5.0;
+          				TARGETED_DEVICE_FAMILY = "1,2";
+          			};
+          			name = Release;
+          		};
+          		Z20000012800000100000001 /* Debug */ = {
+          			isa = XCBuildConfiguration;
+          			buildSettings = {
+          				CODE_SIGNING_ALLOWED = NO;
+          				CODE_SIGNING_REQUIRED = NO;
+          				CODE_SIGN_IDENTITY = "";
+          				GENERATE_INFOPLIST_FILE = YES;
+          				INFOPLIST_KEY_NSMotionUsageDescription = "RideBack utiliza acelerómetro para caídas.";
+          				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+          				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+          				PRODUCT_BUNDLE_IDENTIFIER = com.rideback.app;
+          				PRODUCT_NAME = "$(TARGET_NAME)";
+          				SWIFT_VERSION = 5.0;
+          			};
+          			name = Debug;
+          		};
+          		Z20000022800000100000002 /* Release */ = {
+          			isa = XCBuildConfiguration;
+          			buildSettings = {
+          				CODE_SIGNING_ALLOWED = NO;
+          				CODE_SIGNING_REQUIRED = NO;
+          				CODE_SIGN_IDENTITY = "";
+          				GENERATE_INFOPLIST_FILE = YES;
+          				INFOPLIST_KEY_NSMotionUsageDescription = "RideBack utiliza acelerómetro para caídas.";
+          				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+          				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+          				PRODUCT_BUNDLE_IDENTIFIER = com.rideback.app;
+          				PRODUCT_NAME = "$(TARGET_NAME)";
+          				SWIFT_VERSION = 5.0;
+          			};
+          			name = Release;
+          		};
+          		C10000002800000100000000 = {
+          			isa = XCConfigurationList;
+          			buildConfigurations = (Z10000012800000100000001, Z10000022800000100000002);
+          			defaultConfigurationIsVisible = 0;
+          			defaultConfigurationName = Release;
+          		};
+          		C20000002800000100000000 = {
+          			isa = XCConfigurationList;
+          			buildConfigurations = (Z20000012800000100000001, Z200000228000002);
+          			defaultConfigurationIsVisible = 0;
+          			defaultConfigurationName = Release;
+          		};
+          	};
+          	rootObject = P10000002800000100000000;
+          }
+          EOF
+
           xcodebuild archive \
             -project RideBack.xcodeproj \
             -scheme RideBack \
             -archivePath build/RideBack.xcarchive \
             -destination 'generic/platform=iOS' \
             CODE_SIGNING_ALLOWED=NO \
-            CODE_SIGNING_REQUIRED=NO
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGN_IDENTITY=""
 
           mkdir -p Payload
           cp -r build/RideBack.xcarchive/Products/Applications/RideBack.app Payload/
-          zip -r RideBack.ipa Payload
+          zip -r RideBack-iOS.ipa Payload
     artifacts:
-      - "*.ipa"
-      - Payload/*.ipa
+      - RideBack-iOS.ipa
