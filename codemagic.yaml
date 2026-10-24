@@ -5,12 +5,11 @@ workflows:
     instance_type: mac_mini_m1
     environment:
       xcode: latest
-      cocoapods: default
     scripts:
-      - name: Build iOS app
+      - name: Build iOS App
         script: |
           echo "Building iOS App..."
           xcodebuild build -scheme RideBack -destination 'generic/platform=iOS'
     artifacts:
-      - build/ios/ipa/*.ipa
-      - *.ipa
+      - "*.ipa"
+      - "build/ios/ipa/*.ipa"
