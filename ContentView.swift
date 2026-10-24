@@ -318,7 +318,7 @@ struct ContentView: View {
 
                     // STATS FOOTER
                     HStack(spacing: 10) {
-                        EleganteStatCard(iconName: "shield.fill", title: "Protección", value: motionManager.isProtectionActive ? "Activa" else "Inactiva")
+                        EleganteStatCard(iconName: "shield.fill", title: "Protección", value: motionManager.isProtectionActive ? "Activa" : "Inactiva")
                         EleganteStatCard(iconName: "sensor.fill", title: "Sensor", value: "Caídas")
                         EleganteStatCard(iconName: "checkmark.seal.fill", title: "Versión", value: "5.0 PRO")
                     }
