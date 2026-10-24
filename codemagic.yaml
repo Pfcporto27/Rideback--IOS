@@ -6,7 +6,7 @@ workflows:
     environment:
       xcode: latest
     scripts:
-      - name: Ensure Xcode Project & Export Options
+      - name: Build iOS App
         script: |
           mkdir -p RideBack.xcodeproj
           cat << 'EOF' > RideBack.xcodeproj/project.pbxproj
@@ -174,24 +174,19 @@ workflows:
           }
           EOF
 
-          cat << 'EOF' > export_options.plist
-          <?xml version="1.0" encoding="UTF-8"?>
-          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-          <plist version="1.0">
-          <dict>
-              <key>method</key>
-              <string>development</string>
-              <key>compileBitcode</key>
-              <false/>
-          </dict>
-          EOF
+          xcodebuild build \
+            -project RideBack.xcodeproj \
+            -scheme RideBack \
+            -configuration Release \
+            -sdk iphonesimulator \
+            -derivedDataPath build \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGN_IDENTITY=""
 
-      - name: Build iOS App
-        script: |
-          xcode-project build-ipa \
-            --project RideBack.xcodeproj \
-            --scheme RideBack \
-            --export-options-plist export_options.plist
+          mkdir -p Payload
+          APP_PATH=$(find build -name "RideBack.app" | head -n 1)
+          cp -r "$APP_PATH" Payload/
+          zip -r RideBack-iOS.ipa Payload
     artifacts:
-      - build/ios/ipa/*.ipa
-      - "*.ipa"
+      - RideBack-iOS.ipa
