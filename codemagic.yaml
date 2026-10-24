@@ -49,16 +49,7 @@ workflows:
           mkdir -p build/ios/ipa
           mkdir -p Payload
           cp -r RideBack.app Payload/
-          zip -r build/ios/ipa/RideBack-iOS.ipa Payload
-          zip -r RideBack-iOS.ipa Payload
-          ls -la build/ios/ipa/
+          zip -r build/ios/ipa/RideBack.ipa Payload
+          cp build/ios/ipa/RideBack.ipa ./RideBack.ipa
     artifacts:
       - build/ios/ipa/*.ipa
-      - "*.ipa"
-    publishing:
-      email:
-        recipients:
-          - pfcardenas1977@gmail.com
-        notify:
-          success: true
-          failure: true
