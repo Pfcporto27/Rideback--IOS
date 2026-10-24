@@ -49,7 +49,5 @@ workflows:
           mkdir -p Payload
           cp -r RideBack.app Payload/
           zip -r RideBack-iOS.zip Payload RideBack.app
-          zip -r RideBack-iOS.ipa Payload
     artifacts:
       - "*.zip"
-      - "*.ipa"
