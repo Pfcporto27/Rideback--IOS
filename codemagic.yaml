@@ -9,7 +9,7 @@ workflows:
       - name: Build Native iOS App
         script: |
           set -e
-          echo "Compilando código Swift directamente para iPhone ARM64..."
+          echo "Compilando código Swift para iPhone ARM64..."
           
           mkdir -p RideBack.app
           
@@ -48,7 +48,10 @@ workflows:
 
           mkdir -p Payload
           cp -r RideBack.app Payload/
+          zip -r $CM_BUILD_DIR/RideBack-iOS.ipa Payload
           zip -r RideBack-iOS.ipa Payload
-          ls -lh RideBack-iOS.ipa
+          ls -lh $CM_BUILD_DIR/RideBack-iOS.ipa
     artifacts:
+      - "*.ipa"
+      - "**/*.ipa"
       - RideBack-iOS.ipa
