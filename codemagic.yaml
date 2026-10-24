@@ -6,9 +6,8 @@ workflows:
     environment:
       xcode: latest
     scripts:
-      - name: Build Real iOS App
+      - name: Ensure Xcode Project Structure
         script: |
-          set -e
           mkdir -p RideBack.xcodeproj
           cat << 'EOF' > RideBack.xcodeproj/project.pbxproj
           // !$*UTF8*$!
@@ -175,23 +174,11 @@ workflows:
           }
           EOF
 
-          echo "Compilando app de iOS en modo simulación/libre..."
-          xcodebuild build \
-            -project RideBack.xcodeproj \
-            -scheme RideBack \
-            -configuration Release \
-            -sdk iphonesimulator \
-            -derivedDataPath build \
-            CODE_SIGNING_ALLOWED=NO \
-            CODE_SIGNING_REQUIRED=NO \
-            CODE_SIGN_IDENTITY=""
-
-          APP_PATH=$(find build -name "RideBack.app" | head -n 1)
-          echo "App generada en: $APP_PATH"
-
-          mkdir -p Payload
-          cp -r "$APP_PATH" Payload/
-          zip -r RideBack-iOS.ipa Payload
-          ls -lh RideBack-iOS.ipa
+      - name: Build iOS App
+        script: |
+          xcode-project build-ipa \
+            --project RideBack.xcodeproj \
+            --scheme RideBack
     artifacts:
-      - RideBack-iOS.ipa
+      - build/ios/ipa/*.ipa
+      - "*.ipa"
